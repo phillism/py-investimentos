@@ -1,7 +1,12 @@
 from flask import Flask
 from rotas import bp as rotas_bp
 
-app = Flask(__name__, template_folder='public')
+app = Flask(
+    __name__, 
+    template_folder='../public', 
+    static_folder='../static'
+)
+
 app.config['JSON_SORT_KEYS'] = False
 app.register_blueprint(rotas_bp)
 
