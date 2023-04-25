@@ -4,33 +4,26 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from sqlalchemy import CheckConstraint
 from investimento import Investimento
-
 from datetime import date
 from sqlalchemy import CheckConstraint, Column, Date, Float, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+from investimento_model import Base, Investimento as InvestimentoModel
 
 
-
-Base = declarative_base()
-
-class Investimentos(Base):
-    __tablename__ = 'investimentos'
-    codigo = Column(Integer, primary_key=True)
-    ticker = Column(String(8), nullable=False)
-    data = Column(Date, default=date.today(), nullable=False)
-    quantidade = Column(Integer, CheckConstraint("quantidade >= 0"), nullable=False)
-    valor_unit = Column(Float(precision=2), nullable=False)
-    tipo = Column(String(1), CheckConstraint("tipo IN ('V', 'C')"), nullable=False)
-    taxa_corretagem = Column(Float(precision=16), nullable=False)
 
 
 # configuração do banco de dados SQLite
 db_uri = 'sqlite:///investimentos.db'
 engine = create_engine(db_uri)
 
-# cria as tabelas no banco de dados
+# cria as tabelas no banco de dados (vindas do investimento_model.py)
 Base.metadata.create_all(engine)
 
+
+
+
+# Classe responsável por todas as modificações que irão
+# ocorrer no banco de dados.
 class Database():
 
 	@staticmethod
