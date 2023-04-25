@@ -1,14 +1,23 @@
 from flask import Flask
-from rotas import bp as rotas_bp
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(
     __name__, 
     template_folder='../public', 
     static_folder='../static'
 )
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///investimentos.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JSON_SORT_KEYS'] = False
+
+db = SQLAlchemy()
+
+from database import Investimento
+db.init_app(app) # registra o objeto db com a aplicação Flask
+
+from rotas import bp as rotas_bp
 app.register_blueprint(rotas_bp)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
+    db.create_all()
