@@ -1,3 +1,67 @@
-p {
-	color: green;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --white: #ffffffd5;
+    --black: #4D4D4D;
+    --blue: #0094DE;
+    --cinza: #f2f2f2
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Jost', sans-serif;
+}
+
+body{
+    background-image: url(img/money.jpg);
+    background-size: 200vh 70vw;
+    background-blend-mode: var();
+    font-weight: 500;
+}
+
+hr{
+    height: .2rem;
+    background-color: var(--blue);
+    border: none;
+}
+
+header{
+    background-color: var(--white);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header .logo img{
+    width:4rem;
+    border-radius: 50%;
+}
+
+header h1{
+    font-size: 1.7rem;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: var(--white);
+    box-shadow: 2px 2px 6px var(--black);
+}
+
+form div {
+    width: 200px;
+    height: 100px;
+    border: 1px solid var(--black);
+    padding: 7px;
+    text-align: center;
+}
+
+form div input{
+    margin-top: 1rem;
 }
