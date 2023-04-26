@@ -7,6 +7,12 @@ from investimento import Investimento
 
 bp = Blueprint('rotas', __name__)
 
+def make_error(code, mensagem = 'Não foi possível realizar esta operação.'):
+	return jsonify({ 'erro': f'[{code}] {mensagem}' }), code
+
+
+
+# Rota para carregar a página inicial.
 @bp.route("/", methods=['GET'])
 def index():
 	return render_template('inicio.html')
@@ -19,12 +25,12 @@ def obter_investimento(id):
 	investimento = Database.obter_investimento(id)
 
 	if investimento == Exception:
-		return jsonify({ 'erro': 'Não foi possível realizar esta operação.' }), 500
+		return make_error(500)
 
 	if investimento:
 		return jsonify(investimento.json()), 200
 	else:
-		return jsonify({ 'erro': 'Investimento não encontrado no banco de dados.' }), 404
+		return make_error(404, 'Investimento não encontrado no banco de dados.')
 
 
 
@@ -33,7 +39,7 @@ def obter_investimento(id):
 def obter_investimentos():
 	all = Database.obter_investimentos()
 	if all == Exception:
-		return jsonify({ 'erro': 'Não foi possível realizar esta operação.' }), 500
+		return make_error(500)
 	
 	return jsonify(all)
 
@@ -53,7 +59,7 @@ def adicionar_investimento():
 	criou = Database.add_investimento(investimento)
 
 	if criou == Exception:
-		return jsonify({ 'erro': 'Não foi possível realizar esta operação.' }), 500
+		return make_error(500)
 
 	return jsonify(investimento.json()), 200
 
@@ -65,12 +71,12 @@ def remover_investimento(id: str):
 	deletado = Database.delete_investimento(id)
 
 	if deletado == Exception:
-		return jsonify({ 'erro': 'Não foi possível realizar esta operação.' }), 500
+		return make_error(500)
 
 	if deletado:
 		return jsonify({ 'mensagem': 'Investimento deletado com sucesso!' }), 200
 	
-	return jsonify({ 'mensagem': 'Investimento não encontrado.' }), 404
+	return make_error(404, 'Investimento não encontrado no banco de dados.')
 
 
 
@@ -87,11 +93,11 @@ def atualizar_investimento(id):
 
 		atualizado = Database.atualizar_investimento(investimento)
 		if atualizado == Exception:
-			return jsonify({ 'erro': 'Não foi possível realizar esta operação.' }), 500
+			return make_error(500)
 
 		if not atualizado:
 			return jsonify({}), 204
 
 		return jsonify(investimento.json()), 200
 	else:
-		return jsonify({ 'mensagem': 'Investimento não encontrado.' }), 404
+		return make_error(404, 'Investimento não encontrado no banco de dados.')

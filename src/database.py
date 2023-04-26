@@ -1,16 +1,7 @@
 import sqlite3
-from flask import current_app
-from flask_sqlalchemy import SQLAlchemy
-from datetime import date
-from sqlalchemy import CheckConstraint
 from investimento import Investimento
-from datetime import date
-from sqlalchemy import CheckConstraint, Column, Date, Float, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from investimento_model import Base, Investimento as InvestimentoModel
-
-
-
+from sqlalchemy import create_engine
+from investimento_model import Base
 
 # configuração do banco de dados SQLite
 db_uri = 'sqlite:///investimentos.db'
@@ -22,8 +13,8 @@ Base.metadata.create_all(engine)
 
 
 
-# Classe responsável por todas as modificações que irão
-# ocorrer no banco de dados.
+# Classe responsável por todas as modificações que irão ocorrer no banco de dados.
+# (até o momento dedicada apenas para a tabela 'investimentos')
 class Database():
 
 	@staticmethod

@@ -12,9 +12,6 @@ app.config['JSON_SORT_KEYS'] = False
 
 db = SQLAlchemy()
 
-from database import Investimento
-db.init_app(app) # registra o objeto db com a aplicação Flask
-
 from rotas import bp as rotas_bp
 app.register_blueprint(rotas_bp)
 
