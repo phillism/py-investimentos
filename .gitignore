@@ -3,3 +3,4 @@ src/__pycache__/
 *.pyc
 *.db
 src/instance
+.vscode
