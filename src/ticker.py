@@ -27,7 +27,6 @@ class Ticker:
 
 
 	def update(self):
-		print(len(Ticker.tickers))
 		found = self.find_ticker(self.id)
 
 		if found:
