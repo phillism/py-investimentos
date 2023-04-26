@@ -9,7 +9,7 @@ bp = Blueprint('rotas', __name__)
 
 @bp.route("/", methods=['GET'])
 def index():
-	return render_template('index.html')
+	return render_template('inicio.html')
 
 
 

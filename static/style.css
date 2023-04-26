@@ -43,25 +43,4 @@ header h1{
     font-size: 1.7rem;
 }
 
-form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: var(--white);
-    box-shadow: 2px 2px 6px var(--black);
-}
 
-form div {
-    width: 200px;
-    height: 100px;
-    border: 1px solid var(--black);
-    padding: 7px;
-    text-align: center;
-}
-
-form div input{
-    margin-top: 1rem;
-}
