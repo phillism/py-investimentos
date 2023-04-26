@@ -1,19 +1,18 @@
 const lista = [];
-function adicionarLinha() {
-    var codigo_unico = document.getElementById("cod").value;
-    const regex = /^[A-Za-z]{4}[0-9]{2}$/;
 
 
-    if (!regex.test(codigo_unico)) {
-        alert('O código de transação não segue a formatação adequada.');
-        return;
-    } else {
-        for (let i = 0; i < lista.length; i++) {
-            if (lista[i] == codigo_unico) {
-              alert("Código já existente!");
-              return; // encerra a função
-            }
-          }
+function toggleAdicionar() {
+    var create = document.getElementById('create')
+    display = create.style.display
+    create.style.display = !display || display == 'none' ? 'flex' : 'none'
+}
+
+async function adicionarLinha() {
+    var ticker = document.getElementById("ticker").value;
+
+    if (ticker.trim() == "") {
+        alert("Por favor, preencha o ticker.")
+        return false;
     }
 
     var data = document.getElementById("data").value
@@ -24,12 +23,12 @@ function adicionarLinha() {
     data = moment(data, "YYYY-MM-DD").format("DD/MM/YYYY");
 
     var qnt = document.getElementById("qnt").value;
-    if (qnt.trim() == "") {
-        alert("O campo quantidade de ações está vazio.");
+    if (qnt.trim() == "" || Number(qnt) <= 0) {
+        alert("O campo quantidade é inválido.");
         return false;
     }
     var valor_acao = document.getElementById("ativo").value;
-    if (valor_acao.trim() == "") {
+    if (valor_acao.trim() == "" || Number(valor_acao) <= 0) {
         alert("O campo valor da ação está vazio.");
         return false;
     }
@@ -54,18 +53,17 @@ function adicionarLinha() {
         op = '▼';
     }
     
-    var codigo = document.querySelector("cod")
-    console.log(codigo)
+    try {
+        const result = await adicionarInvestimento({ticker, data, quantidade: qnt, valor_unit: valor_acao, tipo: funcao.toUpperCase()[0], taxa_corretagem: tx_corretagem})
 
-    lista.push(codigo_unico);
-
-    console.log(codigo_unico)
-    console.log(data)
-    console.log(qnt)
-    console.log(`$ ${valor_acao}`)
-    console.log(tx_corretagem)
-    console.log(`R$ ${valor_op.toFixed(2)} `)
-    console.log(imposto.toFixed(2))
-    console.log(`R$ ${valor_final}`)
-    alert("Dados salvos")
+        if (!result.id) {
+            alert("Ocorreu um erro. Verifique se todos os campos são válidos!")
+        } else {
+            toggleAdicionar()
+            carregarInvestimentos()
+        }
+    } catch (e) {
+        alert(e.response.data.erro)
+        return
+    }
 }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/style1.css">
+    <link rel="stylesheet" href="../static/style.css">
     <title>investimento</title>
 </head>
 <body>
@@ -24,94 +24,85 @@
         <h2>Sobre</h2>
         <section id="about">
             <div class="container">
-                <img src="../static/img/pc.png" alt="foto de valores">
                 <div>
-                    <h1 class="mt-2">Tenha controle sobre seus investimentos de forma prática!</h1>
+                    <h1>Tenha controle sobre seus investimentos de forma prática!</h1>
                     <p class="mt-2 mb-2">Essa é uma aplicação de acompanhamento e controle.</p>
                 </div>
+                <img src="../static/img/pc.png" alt="foto de valores">
             </div>
         </section>
         <section id="create">
-            <h2>Adicionar Investimento</h2>
-            <form action="#">
-                <div>
-                    <label for="">Cod da Transação(4L2N)</label><br>
-                    <input type="text" id="cod">
-                </div>
-                <div>
-                    <label for="">Data</label><br>
-                    <input type="date" id="data">
-                </div>
-                <div>
-                    <label for="">Quantidade de ações</label><br>
-                    <input type="number" id="qnt">
-                </div>
-                <div>
-                    <label for="">Valor da Ação($)</label><br>
-                    <input type="number" id="ativo">
-                </div>
-                <div>
-                    <label for="">Função</label><br>
-                    <input type="radio" value="Compra" name="funcao" checked="checked">
-                    <label for="funcao">Compra</label>
-                    <input type="radio" value="Venda" name="funcao">
-                    <label for="funcao">Venda</label>
-                </div>
-                <div>
-                    <label for="">Taxa de Corretagem(%)</label><br>
-                    <input type="number" id="tx">
-                </div>
-                <div>
-                    <label for="">Valor Operacional</label><br>
-                </div>
-                <div>
-                    <label for="">Imposto</label><br>
-                </div>
-                <div>
-                    <label for="">Valor Final</label><br>
-                    <button type="button" value="submit" onclick="adicionarLinha()">Submeter</button>
-                </div>
-            </form>
+            <div>
+                <h2>Adicionar Investimento</h2>
+                <form action="#">
+                    <div>
+                        <label for="ticker">Ticker (4L2N)</label>
+                        <input type="text" id="ticker">
+                    </div>
+                    <div>
+                        <label for="data">Data</label><br>
+                        <input type="date" id="data">
+                    </div>
+                    <div>
+                        <label for="qnt">Quantidade de ações</label>
+                        <input type="number" id="qnt">
+                    </div>
+                    <div>
+                        <label for="ativo">Valor da Ação($)</label>
+                        <input type="number" id="ativo">
+                    </div>
+                    <div>
+                        <label for="">Função</label>
+                        <input type="radio" value="Compra" name="funcao" id="compra" checked="checked">
+                        <label for="compra" class="opcao-input">Compra</label>
+                        <input type="radio" value="Venda" name="funcao" id="venda">
+                        <label for="venda" class="opcao-input">Venda</label>
+                    </div>
+                    <div>
+                        <label for="tx">Taxa de Corretagem(%)</label>
+                        <input type="number" id="tx">
+                    </div>
+
+                    <div class="botoes">
+                        <button type="button" value="submit" onclick="adicionarLinha()">Submeter</button>
+                        <button onclick="toggleAdicionar()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
         </section>
         <section id="all">
-                <h2>Todos os investimentos</h2>
-            <div class="all-inv">
-                <div>
-                    <label for="">Cod da Transação(4L2N)</label><br>
-                </div>
-                <div>
-                    <label for="">Data</label><br>
-                    
-                </div>
-                <div>
-                    <label for="">Quantidade de ações</label><br>
-                    
-                </div>
-                <div>
-                    <label for="">Valor da Ação($)</label><br>
-                    
-                </div>
-                <div>
-                    <label for="">Função</label><br>
-                    
-                </div>
-                <div>
-                    <label for="">Taxa de Corretagem(%)</label><br>
-                    
-                </div>
-                <div>
-                    <label for="">Valor Operacional</label><br>
-                </div>
-                <div>
-                    <label for="">Imposto</label><br>
-                </div>
-                <div>
-                    <label for="">Valor Final</label><br>
-                </div>
+            <h2>Todos os investimentos</h2>
+            <center>
+                <button onclick="toggleAdicionar()">Adicionar</button>
+                <button onclick="carregarInvestimentos()">Atualizar</button>
+            </center>
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ticker</th>
+                            <th>Data</th>
+                            <th>Quantidade de ações</th>
+                            <th>Valor da Ação ($)</th>
+                            <th>Tipo</th>
+                            <th>Taxa de Corretagem (%)</th>
+                            <th>Valor Operacional</th>
+                            <th>Imposto</th>
+                            <th>Valor Final</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="../static/api.js"></script>
+	<script src="../static/database.js"></script>
 	<script src="../static/script.js"></script>
 </body>
 </html>
