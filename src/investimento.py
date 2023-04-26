@@ -45,6 +45,7 @@ class Investimento:
 		return {
 			"id": self.id,
 			"ticker": self.ticker.id if type(self.ticker) != str else self.ticker,
+			"ticker_url": self.ticker.logo_url if self.ticker and type(self.ticker) != str else None,
 			"data": self.data,
 			"quantidade": self.quantidade,
 			"valor_unit": self.valor_unit,

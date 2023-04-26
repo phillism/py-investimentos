@@ -4,6 +4,7 @@ from sqlite3 import Error
 
 from database import Database
 from investimento import Investimento
+from ticker import Ticker
 
 bp = Blueprint('rotas', __name__)
 
@@ -56,10 +57,14 @@ def adicionar_investimento():
 		if key != 'id' and key in investimento.__dict__.keys():
 			setattr(investimento, key, body[key])
 	
+	if not investimento.ticker or not Ticker.exists(investimento.ticker):
+		return jsonify({ 'erro': 'O ticker passado não existe.' }), 404
+	
 	criou = Database.add_investimento(investimento)
 
 	if criou == Exception:
 		return make_error(500)
+	
 
 	return jsonify(investimento.json()), 200
 

@@ -16,6 +16,21 @@ class Ticker:
 		self.update()
 	
 
+	@staticmethod
+	def exists(id: str):
+		if not id:
+			return False
+
+		response = requests.get(f'{BASE_URL}/{id}')
+
+		if not response or response.status_code != 200:
+			return False
+		
+		content = response.json()
+		
+		return not (not content)
+
+
 	def find_ticker(self, id: str):
 		found = None
 		for t in Ticker.tickers:
