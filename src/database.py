@@ -1,4 +1,5 @@
 import sqlite3
+from typing import List
 from investimento import Investimento
 from sqlalchemy import create_engine
 from investimento_model import Base
@@ -24,7 +25,7 @@ class Database():
 		return con
 
 	@staticmethod
-	def obter_investimentos() -> list[Investimento]:
+	def obter_investimentos() -> List[Investimento]:
 		con = Database.get_db()
 		cur = con.cursor()
 		cur.execute('SELECT * FROM investimentos;')
