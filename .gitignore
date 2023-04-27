@@ -1,6 +1,15 @@
 .git/
 src/__pycache__/
+__pycache__/
+*.py[cod]
 *.pyc
 *.db
 src/instance
 .vscode
+venvv
+Flask/
+Flask-Cors/
+Flask-SQLAlchemy/
+python-dotenv/
+requests/
+SQLAlchemy/
