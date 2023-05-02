@@ -96,12 +96,13 @@ def atualizar_investimento(id):
 			if key == 'id': continue
 			setattr(investimento, key, body[key])
 
+		if 'ticker' in dict(body).keys():
+			if not Ticker.exists(investimento.ticker):
+				return jsonify({ 'erro': 'O ticker passado não existe.' }), 404
+
 		atualizado = Database.atualizar_investimento(investimento)
 		if atualizado == Exception:
 			return make_error(500)
-
-		if not atualizado:
-			return jsonify({}), 204
 
 		return jsonify(investimento.json()), 200
 	else:

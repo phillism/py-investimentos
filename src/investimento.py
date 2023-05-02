@@ -42,15 +42,20 @@ class Investimento:
 	
 	
 	def json(self):
+		self.ticker = Ticker(self.ticker)
+
 		return {
 			"id": self.id,
-			"ticker": self.ticker.id if type(self.ticker) != str else self.ticker,
-			"ticker_url": self.ticker.logo_url if self.ticker and type(self.ticker) != str else None,
+
+			"ticker": {
+				"cod": self.ticker.id,
+				"logo_url": self.ticker.logo_url,
+				"currency": self.ticker.moeda
+			},
+
 			"data": self.data,
 			"quantidade": self.quantidade,
 			"valor_unit": self.valor_unit,
 			"tipo": self.tipo,
-			"taxa_corretagem": self.taxa_corretagem,
-			"valor_operacao": self.calcular_valor_final(),
-			"valor_final": self.calcular_valor_final()
+			"taxa_corretagem": self.taxa_corretagem
 		}

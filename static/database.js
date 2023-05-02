@@ -2,6 +2,7 @@ var table = document.querySelector('#all .table')
 var table_body = table.querySelector('tbody')
 
 async function carregarInvestimentos() {
+    filtro = document.querySelector('#filtro-ticker')
 
     try {
         data = await obterInvestimentos()
@@ -12,6 +13,12 @@ async function carregarInvestimentos() {
         data.forEach(d => {
             if (!d.id) {
                 return
+            } else {
+                if (filtro.value) {
+                    if (!d.ticker.cod.includes(filtro.value.toUpperCase())) {
+                        return
+                    }
+                }
             }
 
             var linha = table_body.insertRow();
@@ -30,17 +37,34 @@ async function carregarInvestimentos() {
             var celValorFinal = linha.insertCell();
             var celAcao = linha.insertCell();
 
+            const { ticker, tipo, taxa_corretagem, quantidade, valor_unit, data } = d
+            const { logo_url, cod } = ticker
+
             celId.innerHTML = d.id;
-            celTicker.innerHTML = `<img src="${d.ticker_url}" /> ${d.ticker}`
-            celData.innerHTML = `${d.data}`
-            celQuantidade.innerHTML = `${d.quantidade}`
-            celValorAcao.innerHTML = `${d.valor_unit}`
-            celTipo.innerHTML = `${d.tipo}`
-            celValor.innerHTML = `${d.taxa_corretagem}`
-            celValorOp.innerHTML = `Desenvolvimento`
-            celImposto.innerHTML = `Desenvolvimento`
-            celValorFinal.innerHTML = `Desenvolvimento`
-            celAcao.innerHTML = `<button onclick="deletarInvestimento(${d.id})" cod="${d.id}">Excluir</button>`
+            celTicker.innerHTML = `<img src="${logo_url}" /> ${cod}`
+            celData.innerHTML = `${data}`
+            celQuantidade.innerHTML = `${quantidade}`
+            celValorAcao.innerHTML = `${formatar(valor_unit)}`
+            celTipo.innerHTML = `${tipo}`
+            celValor.innerHTML = `${formatar(taxa_corretagem)}`
+            
+            let valor_op = quantidade * valor_unit;
+            let valor_final = 0
+            let imposto = valor_op * 0.003;
+
+            if (tipo == "C") {
+                valor_final = (valor_op + imposto).toFixed(2);
+            } else {
+                valor_final = (valor_op - imposto).toFixed(2);
+            }
+
+            celValorOp.innerHTML = `${formatar(valor_op)}`
+            celImposto.innerHTML = `${formatar(imposto)}`
+            celValorFinal.innerHTML = `${formatar(Number(valor_final))}`
+            celAcao.innerHTML = `
+            <button class="del-button" onclick="deletarInvestimento(${d.id})" cod="${d.id}">Excluir</button>
+            <button class="edit-button" onclick="editarInvestimento(${d.id})" cod="${d.id}">Editar</button>
+            `
         }) 
     } catch(e) {
         console.log(e)
@@ -59,6 +83,31 @@ async function deletarInvestimento(id) {
             alert("Ocorreu um erro! Tente novamente mais tarde.")
         }
     }
+}
+
+async function editarInvestimento(id) {
+    edit = document.querySelector('#edit')
+    data = await obterInvestimento(id)
+
+    data_split = data.data.split("/")
+
+    console.log(`${(data_split[2])}-${(data_split[1])}-${(data_split[0])}`)
+
+    edit.querySelector('#ticker').value = data.ticker.cod
+    edit.querySelector('#data').value = `${(data_split[2])}-${(data_split[1])}-${(data_split[0])}`
+    edit.querySelector('#qnt').value = data.quantidade
+    edit.querySelector('#ativo').value = data.valor_unit
+    edit.querySelector('#tx').value = data.taxa_corretagem
+    edit.querySelector('#id').setAttribute('value', id)
+
+    if (data.tipo == 'V') {
+        edit.querySelector('#compra').checked = false
+        edit.querySelector('#venda').checked = true
+    }
+    
+    section = table_body.querySelector(`[inv-id="${id}"]`)
+    document.querySelector('#edit h2').innerHTML = `Atualizar investimento (#${id})`
+    toggleEditar()
 }
 
 document.addEventListener('DOMContentLoaded', () => {

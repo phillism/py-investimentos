@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:5000'
+const apiUrl = window.location.origin
 
 // Função para obter um investimento por ID
 function obterInvestimento(id) {

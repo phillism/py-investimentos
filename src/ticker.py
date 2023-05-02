@@ -33,10 +33,14 @@ class Ticker:
 
 	def find_ticker(self, id: str):
 		found = None
-		for t in Ticker.tickers:
-			if t.id.lower() == id.lower():
-				found = t
-				break
+
+		if id and type(id) == str:
+			for t in Ticker.tickers:
+				if t.id.lower() == id.lower():
+					found = t
+					break
+		else:
+			found = id
 		
 		return found
 
@@ -67,7 +71,6 @@ class Ticker:
 		result = content['results'][0]
 		self.valido = True
 		self.id = result['symbol']
-		self.nome = result['longName']
 		self.moeda = result['currency']
 		self.imposto = -1
 		self.logo_url = result['logourl'] if 'logourl' in result else None

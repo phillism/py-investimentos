@@ -15,17 +15,14 @@
 }
 
 body{
-    background-image: url(img/money2.png);
+    background-image: url(/static/img/money2.png);
     background-size: cover;
     background-blend-mode: var();
     font-weight: 500;
     padding: 0 1rem;
 }
 
-header, #about, #create, #all{
-    border-color: var(--color-black);
-    border-style: solid;
-    border-width: 0 1px 1px 1px;
+header, #about, #create, #edit, #all{
     padding: 1.25rem;
 }
 
@@ -56,6 +53,11 @@ header div{
     border-radius: 10px;
     background-color: var(--color-white);
     box-shadow: 2px 2px 6px var(--color-black);
+}
+
+header h2 {
+    font-size: 1.3rem;
+    padding: 1rem;
 }
 
 #about{
@@ -114,7 +116,17 @@ h2{
     margin: 0;
 }
 
-#create {
+#filtro-ticker {
+    padding: .2rem;
+    border-radius: .1rem;
+    border: 1px solid var(--color-black)
+}
+
+.add-button {
+    margin-right: .6rem;
+}
+
+.form {
     position: fixed;
     top: 0;
     left: 0;
@@ -128,12 +140,12 @@ h2{
     align-items: center;
 }
 
-#create > div {
+.form > div {
     background: #fff;
     width: 50%;
 }
 
-#create form {
+.form form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -146,25 +158,25 @@ h2{
     text-overflow: ellipsis;
 }
 
-#create .botoes {
+.form .botoes {
     display: flex;
     gap: 20px;
 }
 
-#create .botoes button {
+.form .botoes button {
     padding: .3rem;
 }
 
-#create form div {
+.form form div {
     display: flex;
     align-items: center;
 }
 
-#create form div > label:not(.opcao-input) {
+.form form div > label:not(.opcao-input) {
     width: 12rem;
 }
 
-#create form div input{
+.form form div input{
     margin-top: 1rem;
 }
 
@@ -178,7 +190,7 @@ h2{
 }
 
 table {
-    width: 90%;
+    width: 100%;
     margin: auto;
     border-collapse: collapse;
     border-spacing: 0;
@@ -189,12 +201,21 @@ table {
 }
 
 #all table button {
-    background: #ff5d5d;
-    font-size: .95rem;
-    padding: .1rem .5rem;
+    font-size: .85rem;
+    padding: 0 .5rem;
     border-radius: 8px;
     border: none;
     cursor: pointer;
+}
+
+#all .del-button {
+    background: #ff3939;
+    color: #fff;
+}
+
+#all .edit-button {
+    background: #ffd15d;
+    margin-top: .1rem;
 }
 
 table img {

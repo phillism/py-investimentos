@@ -47,10 +47,12 @@ class Database():
 
 			return Investimento._from(response)
 		except sqlite3.Error as e:
+			print(e)
 			return Exception
 
 	@staticmethod
 	def add_investimento(investimento: Investimento):
+		print(investimento)
 		try:
 			con = Database.get_db()
 
@@ -72,7 +74,8 @@ class Database():
 			con.commit()
 			con.close()
 			return cur.rowcount > 0
-		except sqlite3.Error:
+		except sqlite3.Error as e:
+			print(e)
 			return Exception
 	
 
@@ -88,7 +91,8 @@ class Database():
 			con.close()
 
 			return cur.rowcount > 0
-		except sqlite3.Error:
+		except sqlite3.Error as e:
+			print(e)
 			return Exception
 
 	@staticmethod
@@ -98,7 +102,7 @@ class Database():
 
 			cur = con.cursor()
 			cur.execute(f"""UPDATE investimentos SET
-				ticker = '{investimento.ticker.id}', data = '{investimento.data}',
+				ticker = '{investimento.ticker.id if type(investimento.ticker) != str else investimento.ticker}', data = '{investimento.data}',
 				quantidade = {investimento.quantidade}, valor_unit = {investimento.valor_unit},
 				tipo = '{investimento.tipo}', taxa_corretagem = {investimento.taxa_corretagem}
 
@@ -109,5 +113,6 @@ class Database():
 			con.close()
 			
 			return cur.rowcount > 0
-		except sqlite3.Error:
+		except sqlite3.Error as e:
+			print(e)
 			return Exception
