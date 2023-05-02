@@ -42,8 +42,6 @@ async function atualizarLinha() {
         "taxa_corretagem": tx_corretagem
     }
 
-    console.log(investimento)
-
     await atualizarInvestimento(id, investimento)
     await carregarInvestimentos()
     toggleEditar()

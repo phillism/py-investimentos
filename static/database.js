@@ -91,8 +91,6 @@ async function editarInvestimento(id) {
 
     data_split = data.data.split("/")
 
-    console.log(`${(data_split[2])}-${(data_split[1])}-${(data_split[0])}`)
-
     edit.querySelector('#ticker').value = data.ticker.cod
     edit.querySelector('#data').value = `${(data_split[2])}-${(data_split[1])}-${(data_split[0])}`
     edit.querySelector('#qnt').value = data.quantidade
