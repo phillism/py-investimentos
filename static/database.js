@@ -50,12 +50,13 @@ async function carregarInvestimentos() {
             
             let valor_op = quantidade * valor_unit;
             let valor_final = 0
-            let imposto = valor_op * 0.003;
+            
+            let imposto = valor_op * 0.0003;
 
             if (tipo == "C") {
-                valor_final = (valor_op + imposto).toFixed(2);
+                valor_final = (valor_op + imposto + taxa_corretagem).toFixed(2);
             } else {
-                valor_final = (valor_op - imposto).toFixed(2);
+                valor_final = (valor_op - imposto - taxa_corretagem).toFixed(2);
             }
 
             celValorOp.innerHTML = `${formatar(valor_op)}`

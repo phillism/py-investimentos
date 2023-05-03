@@ -22,6 +22,23 @@ body{
     padding: 0 1rem;
 }
 
+button {
+    background: #fff;
+    border: 1px solid #adadad;
+    border-radius: 8px;
+    padding: 4px 18px;
+}
+
+input {
+    border-radius: 6px;
+    border: 1px solid #c5c5c5;
+    padding: 4px 8px;
+}
+
+input:focus {
+    outline: none;
+}
+
 header, #about, #create, #edit, #all{
     padding: 1.25rem;
 }
@@ -119,7 +136,6 @@ h2{
 #filtro-ticker {
     padding: .2rem;
     border-radius: .1rem;
-    border: 1px solid var(--color-black)
 }
 
 .add-button {
@@ -167,12 +183,16 @@ h2{
     padding: .3rem;
 }
 
-.form form div {
+.form form div:not(.funcao) {
     display: flex;
     align-items: center;
 }
 
-.form form div > label:not(.opcao-input) {
+.form form div.funcao label:first-child {
+    margin-right: 8.5rem;
+}
+
+.form form div > label:not(.opcao-input, .funcao) {
     width: 12rem;
 }
 
