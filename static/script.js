@@ -64,7 +64,7 @@ async function adicionarLinha() {
 
     data = moment(data, "YYYY-MM-DD").format("DD/MM/YYYY");
 
-    op = funcao == 'Venda' ? 'V' : 'C'
+    op = funcao.getAttribute('value') == 'Venda' ? 'V' : 'C'
     
     try {
         const result = await adicionarInvestimento({ticker, data, quantidade: qnt, valor_unit: valor_acao, tipo: op, taxa_corretagem: tx_corretagem})
