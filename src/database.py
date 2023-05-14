@@ -28,7 +28,7 @@ class Database():
 	def obter_investimentos() -> List[Investimento]:
 		con = Database.get_db()
 		cur = con.cursor()
-		cur.execute('SELECT * FROM investimentos;')
+		cur.execute('SELECT * FROM investimentos ORDER BY data;')
 
 		response = cur.fetchall()
 		con.close()
