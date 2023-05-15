@@ -35,51 +35,47 @@ input {
     padding: 4px 8px;
 }
 
-input:focus {
-    outline: none;
-}
+    input:focus {
+        outline: none;
+    }
 
 header, #about, #create, #edit, #all{
     padding: 1.25rem;
 }
 
-header img{
-    display: block;
-    margin: 1rem auto;
-}
+    header img{
+        display: block;
+        margin: 1rem auto;
+    }
 
-header nav{
-    display: flex;
-    gap: 3rem;
-}
+    header nav{
+        display: flex;
+        gap: 3rem;
+    }
 
-nav a {
-    color: var(--color-black);
-    font-size: 1.25rem;
-    padding: .5rem;
-    text-decoration: none;
-}
+        header nav a {
+        color: var(--color-black);
+        font-size: 1.25rem;
+        padding: .5rem;
+        text-decoration: none;
+        }
 
-header nav a:nth-child(2n-1){
-    text-align: right;
-}
+        header nav a:nth-child(2n-1){
+        text-align: right;
+        }
 
-header div{
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: var(--color-white);
-    box-shadow: 2px 2px 6px var(--color-black);
-}
+    header div{
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: var(--color-white);
+        box-shadow: 2px 2px 6px var(--color-black);
+    }
 
-header h2 {
-    font-size: 1.3rem;
-    padding: 1rem;
-}
-
-#about{
-    padding-right: 0;
-}
+    header h2 {
+        font-size: 1.3rem;
+        padding: 1rem;
+    }
 
 #about-section img {
     display: block;
@@ -107,31 +103,32 @@ h2{
     width: 100%;
 }
 
-#about p{
-    font-size: 1.25rem;
-    padding-right: 1.25rem;
-}
-
 #about{
     margin: 3rem;
     padding: 1rem;
+    padding-right: 0;
     border-radius: 10px;
     background-color: var(--color-white);
     box-shadow: 2px 2px 6px var(--color-black);
 }
 
-#about > div {
-    width: 65vw;
-}
+    #about p{
+        font-size: 1.25rem;
+        padding-right: 1.25rem;
+    }
 
-#about img {
-    width: 30vw;
-}
+    #about > div {
+        width: 65vw;
+    }
 
-#about h1 {
-    padding: 0;
-    margin: 0;
-}
+    #about img {
+        width: 30vw;
+    }
+
+    #about h1 {
+        padding: 0;
+        margin: 0;
+    }
 
 #filtro-ticker {
     padding: .2rem;
@@ -156,68 +153,56 @@ h2{
     align-items: center;
 }
 
-.form > div {
-    background: #fff;
-    width: 50%;
-}
+    .form > div {
+        background: #fff;
+        width: 50%;
+    }
 
-.form form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: var(--color-white);
-    box-shadow: 2px 2px 6px var(--color-black);
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-}
+    .form form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: var(--color-white);
+        box-shadow: 2px 2px 6px var(--color-black);
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
 
-.form .botoes {
-    display: flex;
-    gap: 20px;
-}
+        .form form div:not(.funcao) {
+            display: flex;
+            align-items: center;
+        }
 
-.form .botoes button {
-    padding: .3rem;
-}
+        .form form div > label:not(.opcao-input, .funcao) {
+            width: 12rem;
+        }
 
-.form form div:not(.funcao) {
-    display: flex;
-    align-items: center;
-}
+            .form form div.funcao label:first-child {
+                margin-right: 8.5rem;
+            }
 
-.form form div.funcao label:first-child {
-    margin-right: 8.5rem;
-}
+            .form form div input{
+                margin-top: 1rem;
+            }
 
-.form form div > label:not(.opcao-input, .funcao) {
-    width: 12rem;
-}
+    .form .botoes {
+        display: flex;
+        gap: 20px;
+    }
 
-.form form div input{
-    margin-top: 1rem;
-}
+        .form .botoes button {
+            padding: .3rem;
+        }
 
-
-
+    
 
 /* Estilização da tabela */
 
 #all button {
     padding: .2rem;
-}
-
-table {
-    width: 100%;
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
 }
 
 #all table button {
@@ -238,10 +223,41 @@ table {
     margin-top: .1rem;
 }
 
-table img {
-    width: .95rem;
-    margin-right: .2rem;
+#all .all-inv{
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: var(--color-white);
+    box-shadow: 2px 2px 6px var(--color-black);
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    height: 100px;
 }
+
+    #all .all-inv div {
+        width: 12.5rem;
+        height: 70px;
+        border: 1px solid var(--color-black);
+        padding: 1rem;
+    }
+
+table {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+    table img {
+        width: .95rem;
+        margin-right: .2rem;
+    }
 
 thead {
     background-color: #f7f7f7;
@@ -269,26 +285,6 @@ tbody td {
 
 tbody td:last-child {
     font-weight: bold;
-}
-
-#all .all-inv{
-    display: flex;
-    justify-content: center;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: var(--color-white);
-    box-shadow: 2px 2px 6px var(--color-black);
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-    height: 100px;
-}
-
-#all .all-inv div {
-    width: 12.5rem;
-    height: 70px;
-    border: 1px solid var(--color-black);
-    padding: 1rem;
 }
 
 .mt-1{
