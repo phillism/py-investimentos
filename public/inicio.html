@@ -51,8 +51,8 @@
                     </div>
 
                     <div class="botoes">
-                        <button type="button" value="submit" onclick="adicionarLinha()">Submeter</button>
-                        <button onclick="toggleAdicionar()">Cancelar</button>
+                        <button type="button" value="submit" onclick="addLine()">Submeter</button>
+                        <button onclick="toggleAdd()">Cancelar</button>
                     </div>
                 </form>
             </div>
@@ -92,16 +92,16 @@
                     </div>
 
                     <div class="botoes">
-                        <button type="button" value="submit" onclick="atualizarLinha()">Atualizar</button>
-                        <button onclick="toggleEditar()">Cancelar</button>
+                        <button type="button" value="submit" onclick="updateLine()">Atualizar</button>
+                        <button onclick="toggleEdit()">Cancelar</button>
                     </div>
                 </form>
             </div>
         </section>
         <section id="all">
             
-            <button onclick="toggleAdicionar()" class="add-button">Adicionar</button>
-            <button onclick="carregarInvestimentos()">Pesquisar</button>
+            <button onclick="toggleAdd()" class="add-button">Adicionar</button>
+            <button onclick="loadInvestiments()">Pesquisar</button>
             <input type="search" name="filtro-ticker" id="filtro-ticker" placeholder="Filtrar por ticker">
 
             <div class="table">

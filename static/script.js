@@ -1,24 +1,24 @@
 const lista = [];
 
-function toggleAdicionar() {
-    limparFormulario()
+function toggleAdd() {
+    cleanForm()
     
     var create = document.getElementById('create')
     display = create.style.display
     create.style.display = !display || display == 'none' ? 'flex' : 'none'
 }
 
-function toggleEditar() {
-    limparFormulario()
+function toggleEdit() {
+    cleanForm()
 
     var create = document.getElementById('edit')
     display = create.style.display
     create.style.display = !display || display == 'none' ? 'flex' : 'none'
 
-    carregarInvestimentos()
+    loadInvestiments()
 }
 
-async function atualizarLinha() {
+async function updateLine() {
     var edit = document.getElementById('edit')
 
     var id = edit.querySelector("#id").value;
@@ -42,12 +42,12 @@ async function atualizarLinha() {
         "taxa_corretagem": tx_corretagem
     }
 
-    await atualizarInvestimento(id, investimento)
-    await carregarInvestimentos()
-    toggleEditar()
+    await updateInvestiment(id, investimento)
+    await loadInvestiments()
+    toggleEdit()
 }
 
-async function adicionarLinha() {
+async function addLine() {
     var create = document.getElementById('create')
 
     var ticker = create.querySelector("#ticker").value;
@@ -67,13 +67,13 @@ async function adicionarLinha() {
     op = funcao.getAttribute('value') == 'Venda' ? 'V' : 'C'
     
     try {
-        const result = await adicionarInvestimento({ticker, data, quantidade: qnt, valor_unit: valor_acao, tipo: op, taxa_corretagem: tx_corretagem})
+        const result = await addInvestiment({ticker, data, quantidade: qnt, valor_unit: valor_acao, tipo: op, taxa_corretagem: tx_corretagem})
 
         if (!result.id) {
             alert("Ocorreu um erro. Verifique se todos os campos são válidos!")
         } else {
-            toggleAdicionar()
-            carregarInvestimentos()
+            toggleAdd()
+            loadInvestiments()
         }
     } catch (e) {
         console.log(e)

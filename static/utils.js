@@ -1,4 +1,4 @@
-function formatar(value) {
+function format(value) {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
@@ -37,7 +37,7 @@ function isValidData(ticker, data, quantidade, valor_acao, taxa_corretagem) {
     return true
 }
 
-function limparFormulario() {
+function cleanForm() {
     var ticker = document.getElementById("ticker");
     var data = document.getElementById("data")
     var qnt = document.getElementById("qnt");
