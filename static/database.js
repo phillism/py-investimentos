@@ -44,9 +44,9 @@ async function loadInvestiments() {
             celTicker.innerHTML = `<img src="${logo_url}" /> ${cod}`
             celData.innerHTML = `${data}`
             celQuantidade.innerHTML = `${quantidade}`
-            celValorAcao.innerHTML = `${formatar(valor_unit)}`
+            celValorAcao.innerHTML = `${format(valor_unit)}`
             celTipo.innerHTML = `${tipo}`
-            celValor.innerHTML = `${formatar(taxa_corretagem)}`
+            celValor.innerHTML = `${format(taxa_corretagem)}`
             
             let valor_op = quantidade * valor_unit;
             let valor_final = 0
@@ -59,12 +59,12 @@ async function loadInvestiments() {
                 valor_final = (valor_op - imposto - taxa_corretagem).toFixed(2);
             }
 
-            celValorOp.innerHTML = `${formatar(valor_op)}`
-            celImposto.innerHTML = `${formatar(imposto)}`
-            celValorFinal.innerHTML = `${formatar(Number(valor_final))}`
+            celValorOp.innerHTML = `${format(valor_op)}`
+            celImposto.innerHTML = `${format(imposto)}`
+            celValorFinal.innerHTML = `${format(Number(valor_final))}`
             celAcao.innerHTML = `
-            <button class="del-button" onclick="deletarInvestimento(${d.id})" cod="${d.id}">Excluir</button>
-            <button class="edit-button" onclick="editarInvestimento(${d.id})" cod="${d.id}">Editar</button>
+            <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}">Excluir</button>
+            <button class="edit-button" onclick="editInvestiment(${d.id})" cod="${d.id}">Editar</button>
             `
         }) 
     } catch(e) {
