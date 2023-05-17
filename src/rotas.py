@@ -16,7 +16,7 @@ def make_error(code, mensagem = 'Não foi possível realizar esta operação.'):
 # Rota para carregar a página inicial.
 @bp.route("/", methods=['GET'])
 def index():
-	return render_template('inicio.html')
+	return render_template('index.html')
 
 
 
