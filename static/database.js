@@ -41,7 +41,11 @@ async function carregarInvestimentos() {
             const { logo_url, cod } = ticker
 
             celId.innerHTML = d.id;
-            celTicker.innerHTML = `<img src="${logo_url}" /> ${cod}`
+            celTicker.innerHTML = `
+            <div class="ticker-container">
+                <a class="ticker-redirect-button" href="/ticker/${ticker.cod}"><img class="ticker-icon" src="${logo_url}" /> ${cod}<img src="/static/img/link-thin.svg" /></a>
+            </div>
+            `
             celData.innerHTML = `${data}`
             celQuantidade.innerHTML = `${quantidade}`
             celValorAcao.innerHTML = `${format(valor_unit)}`
@@ -86,7 +90,7 @@ async function deletarInvestimento(id) {
     }
 }
 
-async function editarInvestimento(id) {
+async function editInvestiment(id) {
     edit = document.querySelector('#edit')
     data = await obterInvestimento(id)
 
@@ -109,6 +113,3 @@ async function editarInvestimento(id) {
     toggleEditar()
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    carregarInvestimentos()
-})

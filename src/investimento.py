@@ -50,6 +50,7 @@ class Investimento:
 			"ticker": {
 				"cod": self.ticker.id,
 				"logo_url": self.ticker.logo_url,
+				"enterprise": self.ticker.logo_url,
 				"currency": self.ticker.moeda
 			},
 

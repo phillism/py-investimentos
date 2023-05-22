@@ -20,11 +20,13 @@
 
     <main>
         <section>
-            <div class='ticket'>
-                <h3>Ticket:             <span id="tk">---------</span></h3>
-                <h3>Quantidade:         <span id="qt">---------</span></h3>
-                <h3>Lucro:              <span id="lu">---------</span></h3>
-                <h3>Preço médio:        <span id="pm">---------</span></h3>
+            <div class='ticker'>
+                <img id="ticker-img" src="">
+                <div>
+                    <a href="/">Voltar</a>
+                    <h3>Ticker:             <span id="tk">{{ ticker }}</span></h3>
+                    <h3>Total:         <span id="qt">---------</span></h3>
+                </div>
             </div>
         </section>
 
@@ -34,7 +36,6 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Ticker</th>
                             <th>Data</th>
                             <th>Quant. ações</th>
                             <th>Valor</th>
@@ -43,7 +44,8 @@
                             <th>Valor operacional</th>
                             <th>Imposto</th>
                             <th>Valor Final</th>
-                            <th>Ação</th>
+                            <th>Preço médio</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,5 +55,62 @@
         </section>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="../static/utils.js"></script>
+	<script src="../static/api.js"></script>
+	<script src="../static/database.js"></script>
+	<script src="../static/script.js"></script>
+	<script src="../static/investimento_utils.js"></script>
+
+    <script>
+        async function carregarTickers() {
+            ticker = document.querySelector('#tk')
+            investimentos = (await obterInvestimentos()).filter(i => i.ticker.cod == ticker.innerText)
+
+            investimentos.reverse()
+
+            investimentos_ajustados = ajustarPrecoMedio(investimentos)
+            document.querySelector('#qt').innerText = investimentos.length
+
+            document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
+            
+            var table_body = table.querySelector('tbody')
+
+            investimentos.forEach(i => {
+                var linha = table_body.insertRow();
+                linha.setAttribute('inv-id', i.id)
+
+                // Adiciona as células na nova linha
+                var celId = linha.insertCell();
+                var celData = linha.insertCell();
+                var celQuantidade = linha.insertCell();
+                var celValorAcao = linha.insertCell();
+                var celTipo = linha.insertCell();
+                var celTaxa = linha.insertCell();
+                var celValorOp = linha.insertCell();
+                var celImposto = linha.insertCell();
+                var celValorFinal = linha.insertCell();
+                var celPM = linha.insertCell();
+                var celStatus = linha.insertCell();
+
+                console.log(i)
+
+                celId.innerHTML = i.id
+                celData.innerHTML = i.data
+                celQuantidade.innerHTML = i.quantidade
+                celValorAcao.innerHTML = format(i.valor_unit)
+                celTipo.innerHTML = i.tipo
+                celTaxa.innerHTML = format(i.taxa_corretagem)
+                celValorOp.innerHTML = format(i.valor_op)
+                celImposto.innerHTML = format(i.imposto)
+                celValorFinal.innerHTML = format(i.valor_final)
+                celPM.innerHTML = format(i.preco_medio)
+                celStatus.innerHTML = i.lucro ? 'Lucro' : 'Prejuízo'
+            })
+        }
+
+        carregarTickers()
+    </script>
 </body>
 </html>
