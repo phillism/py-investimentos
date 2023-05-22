@@ -316,6 +316,19 @@ tbody td:last-child {
     text-align: center;
 }
 
+section .ticket{
+    margin: 2rem;
+    padding: 1rem;
+    
+    border-radius: 10px;
+    background-color: var(--color-white);
+    box-shadow: 2px 2px 6px var(--color-black);
+}
+
+section .ticket h2{
+    text-align: left;
+}
+
 @media screen and (max-width: 1290px) {
     .container {
         flex-direction: column-reverse;
@@ -341,3 +354,4 @@ tbody td:last-child {
         margin: 0;
     }
 }
+

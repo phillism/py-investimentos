@@ -1,7 +1,7 @@
 const apiUrl = window.location.origin
 
 // Função para obter um investimento por ID
-function getInvestiment(id) {
+function obterInvestimento(id) {
   return axios.get(`${apiUrl}/investimentos/${id}`)
     .then(response => {
       return response.data
@@ -13,7 +13,7 @@ function getInvestiment(id) {
 }
 
 // Função para obter todos os investimentos
-function getInvestiments() {
+function obterInvestimentos() {
   return axios.get(`${apiUrl}/investimentos`)
     .then(response => {
       return response.data
@@ -25,7 +25,7 @@ function getInvestiments() {
 }
 
 // Função para adicionar um novo investimento
-function addInvestiment(investimento) {
+function adicionarInvestimento(investimento) {
   return axios.post(`${apiUrl}/investimentos`, investimento)
     .then(response => {
       return response.data
@@ -37,7 +37,7 @@ function addInvestiment(investimento) {
 }
 
 // Função para atualizar um investimento existente
-function updateInvestiment(id, investimento) {
+function atualizarInvestimento(id, investimento) {
   return axios.put(`${apiUrl}/investimentos/${id}`, investimento)
     .then(response => {
       return response.data
@@ -49,7 +49,7 @@ function updateInvestiment(id, investimento) {
 }
 
 // Função para remover um investimento existente
-function removeInvestiment(id) {
+function removerInvestimento(id) {
   return axios.delete(`${apiUrl}/investimentos/${id}`)
     .then(response => {
       return response.data

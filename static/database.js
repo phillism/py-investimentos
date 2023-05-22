@@ -1,11 +1,11 @@
 var table = document.querySelector('#all .table')
 var table_body = table.querySelector('tbody')
 
-async function loadInvestiments() {
+async function carregarInvestimentos() {
     filtro = document.querySelector('#filtro-ticker')
 
     try {
-        data = await getInvestiments()
+        data = await obterInvestimentos()
         table_body.innerHTML = ``
 
         data.reverse()
@@ -73,12 +73,12 @@ async function loadInvestiments() {
     }
 }
 
-async function deleteInvestiment(id) {
+async function deletarInvestimento(id) {
     section = table_body.querySelector(`[inv-id="${id}"]`)
     if (section) {
         try {
             section.remove()
-            response = await removeInvestiment(id)
+            response = await removerInvestimento(id)
         } catch (e) {
             console.log(e)
             alert("Ocorreu um erro! Tente novamente mais tarde.")
@@ -86,9 +86,9 @@ async function deleteInvestiment(id) {
     }
 }
 
-async function editInvestiment(id) {
+async function editarInvestimento(id) {
     edit = document.querySelector('#edit')
-    data = await getInvestiment(id)
+    data = await obterInvestimento(id)
 
     data_split = data.data.split("/")
 
@@ -106,9 +106,9 @@ async function editInvestiment(id) {
     
     section = table_body.querySelector(`[inv-id="${id}"]`)
     document.querySelector('#edit h2').innerHTML = `Atualizar investimento (#${id})`
-    toggleEdit()
+    toggleEditar()
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadInvestiments()
+    carregarInvestimentos()
 })
