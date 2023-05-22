@@ -20,6 +20,19 @@ def index():
 
 
 
+@bp.route("/ticker/<ticker>", methods=['GET'])
+def exibir_detalhamento(ticker):
+    investimentos = Database.obter_investimentos()
+    for i in investimentos:
+        try:
+            if i['ticker']['cod'].lower() == ticker.lower():
+                return render_template('ticker.html', ticker=i['ticker']['cod'])
+        except:
+            continue
+
+    return render_template('notfound.html'), ticker
+
+
 # Rota para obter um único investimento.
 @bp.route("/investimentos/<id>", methods=['GET'])
 def obter_investimento(id):
