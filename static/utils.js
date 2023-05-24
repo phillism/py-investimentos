@@ -2,6 +2,15 @@ function format(value) {
     return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+function format_data(data) {
+    const partes = data.split('-'); // Divide a data em partes (ano, mês, dia)
+    const dia = partes[2];
+    const mes = partes[1];
+    const ano = partes[0];
+    
+    return `${dia}/${mes}/${ano}`; // Retorna a data formatada
+  }
+
 
 /*
 Função que verifica se os campos de um formumário são válidos ou não.

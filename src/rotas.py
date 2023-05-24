@@ -30,7 +30,7 @@ def exibir_detalhamento(ticker):
         except:
             continue
 
-    return render_template('notfound.html'), ticker
+    return render_template('not_found.html'), ticker
 
 
 # Rota para obter um único investimento.

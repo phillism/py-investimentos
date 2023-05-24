@@ -5,28 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
     content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/img/logo.png">
+    <link rel="stylesheet" href="/static/styles/global.css">
     <link rel="stylesheet" href="/static/styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-..." crossorigin="anonymous">
     <title>Plataforma de Gerenciamento de Investimentos | Home</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <div>
             <img src="/static/img/logo.png" alt="logo">
-            <center>
-                <h2>Todos os investimentos</h2>
-            </center>
         </div>
     </header>
 
     <main>
         <section>
-            <div class='ticker'>
+            <div class="ticker">
                 <img id="ticker-img" src="">
                 <div>
-                    <a href="/">Voltar</a>
-                    <h3>Ticker:             <span id="tk">{{ ticker }}</span></h3>
-                    <h3>Total:         <span id="qt">---------</span></h3>
+                    <a href="/"><i class="fa-solid fa-arrow-left-long"></i></a>
+                    <div>
+                        <p>Ticker:             <span id="tk">{{ ticker }}</span></p>
+                        <p>Total:         <span id="qt">---------</span></p>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="edit" class="form">
+            <div>
+                <h2>Atualizar Investimento</h2>
+                <form action="#">
+                    <input type="text" id="id" hidden>
+
+                    <div>
+                        <label for="ticker">Ticker</label>
+                        <input type="text" id="ticker">
+                    </div>
+                    <div>
+                        <label for="data">Data</label><br>
+                        <input type="date" id="data">
+                    </div>
+                    <div>
+                        <label for="qnt">Quantidade de ações</label>
+                        <input type="number" id="qnt">
+                    </div>
+                    <div>
+                        <label for="ativo">Valor da Ação</label>
+                        <input type="number" id="ativo">
+                    </div>
+                    <div>
+                        <label for="">Função</label>
+                        <input type="radio" value="Compra" name="funcao" id="compra" checked="checked">
+                        <label for="compra" class="opcao-input">Compra</label>
+                        <input type="radio" value="Venda" name="funcao" id="venda">
+                        <label for="venda" class="opcao-input">Venda</label>
+                    </div>
+                    <div>
+                        <label for="tx">Taxa de Corretagem</label>
+                        <input type="number" id="tx">
+                    </div>
+
+                    <div class="botoes">
+                        <button type="button" value="submit" onclick="atualizarLinha(true)">Atualizar</button>
+                        <button onclick="toggleEditar(true)">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </section>
 
@@ -35,7 +79,6 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Data</th>
                             <th>Quant. ações</th>
                             <th>Valor</th>
@@ -45,7 +88,7 @@
                             <th>Imposto</th>
                             <th>Valor Final</th>
                             <th>Preço médio</th>
-                            <th>Status</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,6 +100,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://kit.fontawesome.com/dbe8aaae06.js" crossorigin="anonymous"></script>
     <script src="../static/utils.js"></script>
 	<script src="../static/api.js"></script>
 	<script src="../static/database.js"></script>
@@ -65,24 +109,29 @@
 
     <script>
         async function carregarTickers() {
+            
             ticker = document.querySelector('#tk')
+
+            
             investimentos = (await obterInvestimentos()).filter(i => i.ticker.cod == ticker.innerText)
-
+            
             investimentos.reverse()
-
+            
             investimentos_ajustados = ajustarPrecoMedio(investimentos)
             document.querySelector('#qt').innerText = investimentos.length
-
+            
             document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
             
             var table_body = table.querySelector('tbody')
+            table_body.innerHTML = `` 
+
+            ticker.innerHTML += ` (${investimentos[0].ticker.enterprise})`
 
             investimentos.forEach(i => {
                 var linha = table_body.insertRow();
                 linha.setAttribute('inv-id', i.id)
 
                 // Adiciona as células na nova linha
-                var celId = linha.insertCell();
                 var celData = linha.insertCell();
                 var celQuantidade = linha.insertCell();
                 var celValorAcao = linha.insertCell();
@@ -92,12 +141,9 @@
                 var celImposto = linha.insertCell();
                 var celValorFinal = linha.insertCell();
                 var celPM = linha.insertCell();
-                var celStatus = linha.insertCell();
+                var celAcao = linha.insertCell();
 
-                console.log(i)
-
-                celId.innerHTML = i.id
-                celData.innerHTML = i.data
+                celData.innerHTML = format_data(i.data)
                 celQuantidade.innerHTML = i.quantidade
                 celValorAcao.innerHTML = format(i.valor_unit)
                 celTipo.innerHTML = i.tipo
@@ -105,8 +151,11 @@
                 celValorOp.innerHTML = format(i.valor_op)
                 celImposto.innerHTML = format(i.imposto)
                 celValorFinal.innerHTML = format(i.valor_final)
-                celPM.innerHTML = format(i.preco_medio)
-                celStatus.innerHTML = i.lucro ? 'Lucro' : 'Prejuízo'
+                celPM.innerHTML = `${format(i.preco_medio)}`
+                celAcao.innerHTML = `
+                    <button class="del-button" onclick="deleteInvestiment(${i.id})" cod="${i.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+                    <button class="edit-button" onclick="editInvestiment(${i.id}, true)" cod="${i.id}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+                `
             })
         }
 

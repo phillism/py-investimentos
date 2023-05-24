@@ -2,7 +2,7 @@ var table = document.querySelector('#all .table')
 var table_body = table.querySelector('tbody')
 
 async function carregarInvestimentos() {
-    filtro = document.querySelector('#filtro-ticker')
+    filtro = document.querySelector('#filter-ticker')
 
     try {
         data = await obterInvestimentos()
@@ -14,7 +14,7 @@ async function carregarInvestimentos() {
             if (!d.id) {
                 return
             } else {
-                if (filtro.value) {
+                if (filtro && filtro.value) {
                     if (!d.ticker.cod.includes(filtro.value.toUpperCase())) {
                         return
                     }
@@ -46,7 +46,8 @@ async function carregarInvestimentos() {
                 <a class="ticker-redirect-button" href="/ticker/${ticker.cod}"><img class="ticker-icon" src="${logo_url}" /> ${cod}<img src="/static/img/link-thin.svg" /></a>
             </div>
             `
-            celData.innerHTML = `${data}`
+
+            celData.innerHTML = `${format_data(data)}`
             celQuantidade.innerHTML = `${quantidade}`
             celValorAcao.innerHTML = `${format(valor_unit)}`
             celTipo.innerHTML = `${tipo}`
@@ -67,8 +68,8 @@ async function carregarInvestimentos() {
             celImposto.innerHTML = `${format(imposto)}`
             celValorFinal.innerHTML = `${format(Number(valor_final))}`
             celAcao.innerHTML = `
-            <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}">Excluir</button>
-            <button class="edit-button" onclick="editInvestiment(${d.id})" cod="${d.id}">Editar</button>
+            <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+            <button class="edit-button" onclick="editInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
             `
         }) 
     } catch(e) {
@@ -77,7 +78,7 @@ async function carregarInvestimentos() {
     }
 }
 
-async function deletarInvestimento(id) {
+async function deleteInvestiment(id) {
     section = table_body.querySelector(`[inv-id="${id}"]`)
     if (section) {
         try {
@@ -90,14 +91,13 @@ async function deletarInvestimento(id) {
     }
 }
 
-async function editInvestiment(id) {
+async function editInvestiment(id, editing = false) {
     edit = document.querySelector('#edit')
     data = await obterInvestimento(id)
 
     data_split = data.data.split("/")
-
     edit.querySelector('#ticker').value = data.ticker.cod
-    edit.querySelector('#data').value = `${(data_split[2])}-${(data_split[1])}-${(data_split[0])}`
+    edit.querySelector('#data').value = data.data
     edit.querySelector('#qnt').value = data.quantidade
     edit.querySelector('#ativo').value = data.valor_unit
     edit.querySelector('#tx').value = data.taxa_corretagem
@@ -110,6 +110,6 @@ async function editInvestiment(id) {
     
     section = table_body.querySelector(`[inv-id="${id}"]`)
     document.querySelector('#edit h2').innerHTML = `Atualizar investimento (#${id})`
-    toggleEditar()
+    toggleEditar(editing)
 }
 

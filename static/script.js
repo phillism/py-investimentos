@@ -8,17 +8,23 @@ function toggleAdicionar() {
     create.style.display = !display || display == 'none' ? 'flex' : 'none'
 }
 
-function toggleEditar() {
-    limparFormulario()
+function toggleEditar(tickerPage = false) {
+    var edit = document.getElementById('edit')
+    display = edit.style.display
+    edit.style.display = !display || display == 'none' ? 'flex' : 'none'
 
-    var create = document.getElementById('edit')
-    display = create.style.display
-    create.style.display = !display || display == 'none' ? 'flex' : 'none'
+    if (edit.style.display == 'none') {
+        limparFormulario()
+    }
 
-    carregarInvestimentos()
+    if (tickerPage) {
+        carregarTickers()
+    } else {
+        carregarInvestimentos()
+    }
 }
 
-async function atualizarLinha() {
+async function atualizarLinha(tickerPage = false) {
     var edit = document.getElementById('edit')
 
     var id = edit.querySelector("#id").value;
@@ -28,10 +34,6 @@ async function atualizarLinha() {
     var valor_acao = edit.querySelector("#ativo").value;
     var funcao = edit.querySelector('input[name="funcao"]:checked').value;
     var tx_corretagem = edit.querySelector("#tx").value;
-
-    if (data) {
-        data = moment(data, "YYYY-MM-DD").format("DD/MM/YYYY");
-    }
 
     investimento = {
         "ticker": ticker,
@@ -43,8 +45,14 @@ async function atualizarLinha() {
     }
 
     await atualizarInvestimento(id, investimento)
-    await carregarInvestimentos()
-    toggleEditar()
+    
+    if (tickerPage) {
+        // carregarTickers()
+    } else {
+        // await carregarInvestimentos()
+    }
+
+    toggleEditar(tickerPage)
 }
 
 async function adicionarLinha() {
@@ -62,7 +70,6 @@ async function adicionarLinha() {
         return
     }
 
-    data = moment(data, "YYYY-MM-DD").format("DD/MM/YYYY");
 
     op = funcao.getAttribute('value') == 'Venda' ? 'V' : 'C'
     

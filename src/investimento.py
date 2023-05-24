@@ -43,6 +43,7 @@ class Investimento:
 	
 	def json(self):
 		self.ticker = Ticker(self.ticker)
+		print(self.ticker.__dict__)
 
 		return {
 			"id": self.id,
@@ -50,7 +51,7 @@ class Investimento:
 			"ticker": {
 				"cod": self.ticker.id,
 				"logo_url": self.ticker.logo_url,
-				"enterprise": self.ticker.logo_url,
+				"enterprise": self.ticker.enterprise,
 				"currency": self.ticker.moeda
 			},
 

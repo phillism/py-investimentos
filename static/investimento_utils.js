@@ -20,7 +20,7 @@ const ajustarPrecoMedio = (investiments) => {
             soma_total -= i.quantidade
             i.preco_medio = ultimo_pm
         }
-        
+
         i.lucro = i.preco_medio >= 0
 
         ultimo_pm = i.preco_medio

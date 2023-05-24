@@ -12,6 +12,7 @@ class Ticker:
 		self.imposto = None
 		self.logo_url = None
 		self.valido = None
+		self.enterprise = None
 
 		self.update()
 	
@@ -54,6 +55,7 @@ class Ticker:
 			self.moeda = found.moeda
 			self.imposto = found.imposto
 			self.logo_url = found.logo_url
+			self.enterprise = found.enterprise
 			self.valido = True
 			return True
 		
@@ -71,6 +73,7 @@ class Ticker:
 		result = content['results'][0]
 		self.valido = True
 		self.id = result['symbol']
+		self.enterprise = result['longName']
 		self.moeda = result['currency']
 		self.imposto = -1
 		self.logo_url = result['logourl'] if 'logourl' in result else None

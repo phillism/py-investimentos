@@ -1,27 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Jost', sans-serif;
-}
-
-:root{
-    --color-prymary: #3EA201;
-    --color-secondary: #115C01;
-    --color-black: #000;
-    --color-white: #fff;
-}
-
-body{
-    background-image: url(/static/img/money2.png);
-    background-size: cover;
-    background-blend-mode: var();
-    font-weight: 500;
-    padding: 0 1rem;
-}
-
 button {
     background: #fff;
     border: 1px solid #adadad;
@@ -39,40 +15,24 @@ input {
         outline: none;
     }
 
-header, #about, #create, #edit, #all{
+.header, #about, #create, #edit, #all{
     padding: 1.25rem;
 }
-
-    header img{
+    .header img{
+        width: 100px;
+        margin: 0;
         display: block;
-        margin: 1rem auto;
     }
 
-    header nav{
-        display: flex;
-        gap: 3rem;
-    }
-
-        header nav a {
-        color: var(--color-black);
-        font-size: 1.25rem;
-        padding: .5rem;
-        text-decoration: none;
-        }
-
-        header nav a:nth-child(2n-1){
-        text-align: right;
-        }
-
-    header div{
-        margin: 1rem;
-        padding: 1rem;
+    .header div {
+        padding: 0 2rem;
         border-radius: 10px;
         background-color: var(--color-white);
-        box-shadow: 2px 2px 6px var(--color-black);
+        box-shadow: 2px 2px 6px #00000046;
+        display: flex;
     }
 
-    header h2 {
+    .header h2 {
         font-size: 1.3rem;
         padding: 1rem;
     }
@@ -83,60 +43,38 @@ header, #about, #create, #edit, #all{
     max-width: 100%;
 }
 
-h1{
-    font-size: 3rem;
-    line-height: 105%;
-}
-
-h2{
-    font-size: 2.5rem;
-    text-align: center;
-}
-
-.container {
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem;
-    gap: 2rem;
-    width: 100%;
-}
-
-#about{
-    margin: 3rem;
-    padding: 1rem;
-    padding-right: 0;
-    border-radius: 10px;
-    background-color: var(--color-white);
-    box-shadow: 2px 2px 6px var(--color-black);
-}
-
-    #about p{
-        font-size: 1.25rem;
-        padding-right: 1.25rem;
-    }
-
-    #about > div {
-        width: 65vw;
-    }
-
-    #about img {
-        width: 30vw;
-    }
-
-    #about h1 {
-        padding: 0;
-        margin: 0;
-    }
-
-#filtro-ticker {
-    padding: .2rem;
+.table-header #filter-ticker {
+    padding: .3rem .5rem;
     border-radius: .1rem;
+    margin: 0;
+    border: 0;
+    border-radius: 0 6px 6px 0;
+    border: 1px solid rgb(42, 93, 231);
+    border-left: none;
 }
 
-.add-button {
+.table-header button {
+    cursor: pointer;
+}
+
+.table-header .search-button {
+    margin: -5px;
+    border-radius: 6px 0 0 6px;
+    border: 0;
+    padding: .3rem .8rem;
+    color: rgb(42, 93, 231);
+
+    border: 1px solid rgb(42, 93, 231);
+    border-right: none;
+}
+
+.table-header .add-button {
     margin-right: .6rem;
+    background:rgb(23, 182, 23);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.144);
+    padding: .3rem 1.2rem;
 }
 
 .form {
@@ -201,7 +139,7 @@ h2{
 
 /* Estilização da tabela */
 
-#all button {
+#all table button {
     padding: .2rem;
 }
 
@@ -214,12 +152,13 @@ h2{
 }
 
 #all .del-button {
-    background: #ff3939;
-    color: #fff;
+    background: #ff7272;
+    color: #610808;
 }
 
 #all .edit-button {
     background: #ffd15d;
+    color: #505050;
     margin-top: .1rem;
 }
 
@@ -250,8 +189,9 @@ table {
     border-spacing: 0;
     font-family: Arial, sans-serif;
     font-size: 14px;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
+    box-shadow: 1px 1px 11px 1px #0000001a;
 }
 
     table img {
@@ -317,12 +257,12 @@ tbody td:last-child {
 }
 
 section .ticker{
-    margin: 2rem;
+    margin: 1.25rem;
     padding: 1rem;
     
     border-radius: 10px;
     background-color: var(--color-white);
-    box-shadow: 2px 2px 6px var(--color-black);
+    box-shadow: 2px 2px 6px #00000036;
 
     display: flex;
     align-items: center;
@@ -367,11 +307,6 @@ section .ticker img {
         justify-content: space-between;
     }
 
-    header img{
-        width: 4.5rem;
-        left: 200px;
-    }
-
     header img,
     header nav,
     header .button {
@@ -379,3 +314,29 @@ section .ticker img {
     }
 }
 
+#tk, #qt {
+    font-weight: 600;
+}
+
+.ticker a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 1.7rem;
+    height: 1.7rem;
+    color: #7c7c7c;
+    background: #dddddd;
+    border-radius: 50%;
+    font-size: .8rem;
+}
+
+.ticker a i {
+    padding-top: .2rem;
+}
+
+.ticker > div {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
