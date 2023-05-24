@@ -113,19 +113,28 @@
             ticker = document.querySelector('#tk')
 
             
-            investimentos = (await obterInvestimentos()).filter(i => i.ticker.cod == ticker.innerText)
+            investimentos = (await obterInvestimentos()).filter(i => {
+                t = undefined
+                if (ticker.innerText.includes(' (')) {
+                    t = ticker.innerText.split(' (')[0]
+                } else {
+                    t = ticker.innerText
+                }
+
+                return i.ticker.cod == t
+            })
             
             investimentos.reverse()
             
             investimentos_ajustados = ajustarPrecoMedio(investimentos)
             document.querySelector('#qt').innerText = investimentos.length
-            
+            console.log(investimentos[0])
             document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
             
             var table_body = table.querySelector('tbody')
             table_body.innerHTML = `` 
 
-            ticker.innerHTML += ` (${investimentos[0].ticker.enterprise})`
+            ticker.innerHTML + `${investimentos[0].ticker.cod} (${investimentos[0].ticker.enterprise})`
 
             investimentos.forEach(i => {
                 var linha = table_body.insertRow();
