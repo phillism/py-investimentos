@@ -8,7 +8,9 @@ async function carregarInvestimentos() {
         let { lucro_prejuizo_total, investiments } = ajustarPrecoMedioGeral(await obterInvestimentos())
 
         table_body.innerHTML = ``
-        document.querySelector('#info-profit').innerHTML = format(lucro_prejuizo_total)
+
+        lucro_prejuizo_total_fmt = format(lucro_prejuizo_total)
+        document.querySelector('#info-profit').innerHTML = lucro_prejuizo_total < 0 ? `<span class="negative">${lucro_prejuizo_total_fmt}</span>` : `<span class="positive">${lucro_prejuizo_total_fmt}</span>`
         document.querySelector('#info-amount').innerHTML = investiments.length
 
         // data.reverse()
@@ -69,7 +71,10 @@ async function carregarInvestimentos() {
             celValorOp.innerHTML = `${format(valor_op)}`
             celImposto.innerHTML = `${format(imposto)}`
             celPM.innerHTML = `${format(preco_medio)}`
-            celLP.innerHTML = lucro_prejuizo ? `${format(lucro_prejuizo)}` : "-"
+
+            celLP.innerHTML = lucro_prejuizo ? `${lucro_prejuizo < 0 ? `<i class="fa-solid fa-arrow-trend-down negative"></i>` : `<i class="fa-solid fa-arrow-trend-up positive"></i>`} ${format(lucro_prejuizo)}` : "-"
+
+
             celValorFinal.innerHTML = `${format(Number(valor_final))}`
             celAcao.innerHTML = `
             <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>

@@ -1,5 +1,13 @@
 function format(value) {
-    return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    retorno = value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    if (value < 0) {
+        console.log(typeof retorno)
+        retorno = retorno.replace("-R$", "R$ -")
+    }
+
+    console.log(retorno)
+    return retorno
 }
 
 function format_data(data) {

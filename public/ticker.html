@@ -130,13 +130,15 @@
             investimentos.reverse()
             
             investimentos_ajustados = ajustarPrecoMedio(investimentos)
-            console.log(investimentos_ajustados)
-            console.log(investimentos_ajustados)
-            console.log(investimentos_ajustados.lucro_prejuizo_total)
-            console.log(investimentos_ajustados.lucro_prejuizo_total)
 
             document.querySelector('#qt').innerText = investimentos.length
-            document.querySelector('#lc').innerText = format(investimentos_ajustados.lucro_prejuizo_total)
+
+            document.querySelector('#lc').innerHTML = `<span class="${investimentos_ajustados.lucro_prejuizo_total > 0 ? "positive" : "negative"}">
+                ${format(investimentos_ajustados.lucro_prejuizo_total)}
+            </span>`
+
+
+
             document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
             
             var table_body = table.querySelector('tbody')
@@ -172,7 +174,8 @@
                 celTaxaB3.innerHTML = format(i.imposto)
                 celValorFinal.innerHTML = format(i.valor_final)
                 celPM.innerHTML = `${format(i.preco_medio)}`
-                celLP.innerHTML = `${format(i.lucro_prejuizo || "-")}`
+                celLP.innerHTML = i.lucro_prejuizo ? `${i.lucro_prejuizo < 0 ? `<i class="fa-solid fa-arrow-trend-down negative"></i>` : `<i class="fa-solid fa-arrow-trend-up positive"></i>`} ${format(i.lucro_prejuizo)}` : "-"
+                // celLP.innerHTML = lucro_prejuizo ? `${lucro_prejuizo < 0 ? `<i class="fa-solid fa-chart-line negative"></i>` : `<i class="fa-solid fa-chart-line positive"></i>`} ${format(lucro_prejuizo)}` : "-"
                 celAcao.innerHTML = `
                     <button class="del-button" onclick="deleteInvestiment(${i.id})" cod="${i.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
                     <button class="edit-button" onclick="editInvestiment(${i.id}, true)" cod="${i.id}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
