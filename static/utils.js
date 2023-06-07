@@ -94,7 +94,10 @@ const ajustarPrecoMedioGeral = (investiments) => {
     dados = {}
     investiments.reverse()
 
-    return investiments.map((i) => {
+
+    lucro_prejuizo_total = 0
+
+    investiments = investiments.map((i) => {
         i.valor_op = i.quantidade * i.valor_unit;
         i.imposto = i.valor_op * 0.0003;
         
@@ -108,6 +111,7 @@ const ajustarPrecoMedioGeral = (investiments) => {
         } else {
             dados[i.ticker.cod.toUpperCase()] = {
                 soma_total: 0,
+                lucro_prejuizo_total: 0,
                 ultimo_pm: 0
             }
         }
@@ -127,6 +131,7 @@ const ajustarPrecoMedioGeral = (investiments) => {
 
             i.preco_medio = ultimo_pm
             i.lucro_prejuizo = i.valor_final - (i.preco_medio * i.quantidade)
+            lucro_prejuizo_total += i.lucro_prejuizo
         }
 
         dado.soma_total = soma_total
@@ -135,4 +140,8 @@ const ajustarPrecoMedioGeral = (investiments) => {
 
         return i
     })
+
+    return {
+        lucro_prejuizo_total, investiments
+    }
 }

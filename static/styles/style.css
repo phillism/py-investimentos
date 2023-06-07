@@ -43,6 +43,11 @@ input {
     max-width: 100%;
 }
 
+.table-header {
+    display: flex;
+    gap: 10px;
+}
+
 .table-header #filter-ticker {
     padding: .3rem .5rem;
     border-radius: .1rem;
@@ -51,6 +56,25 @@ input {
     border-radius: 0 6px 6px 0;
     border: 1px solid rgb(42, 93, 231);
     border-left: none;
+}
+
+.table-header .info {
+    background: #ffffff;
+    display: flex;
+    gap: 5px;
+    padding: .2rem 1rem;
+    border-radius: 4px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #5e5e5e;
+    font-size: 14px;
+    box-shadow: 0px 0px 12px 2px rgba(0, 0, 0, 0.062);
+
+}
+
+.table-header .info p {
+    margin: 0 20px;
 }
 
 .table-header button {
@@ -200,13 +224,13 @@ table {
     }
 
 thead {
-    background-color: #f7f7f7;
+    background-color: #eeeeee;
     border-bottom: 1px solid #ddd;
 }
 
 th, td {
     text-align: center;
-    padding: 8px;
+    padding: 12px;
 }
 
 th {
@@ -214,13 +238,17 @@ th {
     color: #555;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
 
 tbody td {
     border-bottom: 1px solid #ddd;
-    background: var(--color-white);
+}
+
+tbody tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+tbody tr:nth-child(odd) {
+    background: #ffffff;
 }
 
 tbody td:last-child {

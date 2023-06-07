@@ -5,12 +5,15 @@ async function carregarInvestimentos() {
     filtro = document.querySelector('#filter-ticker')
 
     try {
-        data = ajustarPrecoMedioGeral(await obterInvestimentos())
+        let { lucro_prejuizo_total, investiments } = ajustarPrecoMedioGeral(await obterInvestimentos())
+
         table_body.innerHTML = ``
+        document.querySelector('#info-profit').innerHTML = format(lucro_prejuizo_total)
+        document.querySelector('#info-amount').innerHTML = investiments.length
 
         // data.reverse()
 
-        data.forEach(d => {
+        investiments.forEach(d => {
             if (!d.id) {
                 return
             } else {
@@ -25,7 +28,6 @@ async function carregarInvestimentos() {
             linha.setAttribute('inv-id', d.id)
 
             // Adiciona as células na nova linha
-            var celId = linha.insertCell();
             var celTicker = linha.insertCell();
             var celData = linha.insertCell();
             var celQuantidade = linha.insertCell();
@@ -41,7 +43,6 @@ async function carregarInvestimentos() {
             const { ticker, tipo, taxa_corretagem, quantidade, valor_unit, data, lucro_prejuizo, preco_medio } = d
             const { logo_url, cod } = ticker
 
-            celId.innerHTML = d.id;
             celTicker.innerHTML = `
             <div class="ticker-container">
                 <a class="ticker-redirect-button" href="/ticker/${ticker.cod}"><img class="ticker-icon" src="${logo_url}" /> ${cod}<img src="/static/img/link-thin.svg" /></a>

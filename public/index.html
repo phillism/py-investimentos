@@ -104,15 +104,22 @@
             
             <div class="table-header">
                 <button onclick="toggleAdicionar()" class="add-button"><i class="fa-solid fa-plus"></i> Adicionar</button>
-                <button onclick="carregarInvestimentos()" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                <input type="search" name="filter-ticker" id="filter-ticker" placeholder="Filtrar por ticker">
+                <div>
+                    <button onclick="carregarInvestimentos()" class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="search" name="filter-ticker" id="filter-ticker" placeholder="Filtrar por ticker">
+                </div>
+
+                <div class="info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <p>Total de ativos: <strong id="info-amount">...</strong></p>
+                    <p>Lucro total: <strong id="info-profit">...</strong></p>
+                </div>
             </div>
 
             <div class="table">
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>Ticker</th>
                             <th>Data</th>
                             <th>Quant. ações</th>
