@@ -89,3 +89,51 @@ const ajustarPrecoMedio = (investiments) => {
         return i
     })
 }
+
+const ajustarPrecoMedioGeral = (investiments) => {
+    dados = {}
+    investiments.reverse()
+
+    return investiments.map((i) => {
+        console.log(i)
+        i.valor_op = i.quantidade * i.valor_unit;
+        i.imposto = i.valor_op * 0.0003;
+        
+        let dado = dados[i.ticker.cod.toUpperCase()]
+        
+        let soma_total = 0
+        let ultimo_pm = 0
+        if (dado) {
+            soma_total = dado.soma_total
+            ultimo_pm = dado.ultimo_pm
+        } else {
+            dados[i.ticker.cod.toUpperCase()] = {
+                soma_total: 0,
+                ultimo_pm: 0
+            }
+        }
+
+        dado = dados[i.ticker.cod.toUpperCase()]
+
+        if (i.tipo == 'C') {
+            i.valor_final = i.valor_op + i.imposto + i.taxa_corretagem;
+
+            soma_total += i.quantidade  
+
+            i.preco_medio = (((soma_total - i.quantidade) * ultimo_pm) + i.valor_final) / soma_total
+        } else {
+            i.valor_final = i.valor_op - i.imposto - i.taxa_corretagem;
+
+            soma_total -= i.quantidade
+
+            i.preco_medio = ultimo_pm
+            i.lucro_prejuizo = i.valor_final - (i.preco_medio * i.quantidade)
+        }
+
+        dado.soma_total = soma_total
+        dado.ultimo_pm = i.preco_medio
+        
+
+        return i
+    })
+}
