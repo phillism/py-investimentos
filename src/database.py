@@ -52,7 +52,6 @@ class Database():
 
 	@staticmethod
 	def add_investimento(investimento: Investimento):
-		print(investimento)
 		try:
 			con = Database.get_db()
 

@@ -43,7 +43,6 @@ class Investimento:
 	
 	def json(self):
 		self.ticker = Ticker(self.ticker)
-		print(self.ticker.__dict__)
 
 		return {
 			"id": self.id,

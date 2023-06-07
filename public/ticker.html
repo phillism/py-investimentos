@@ -130,7 +130,6 @@
             
             investimentos_ajustados = ajustarPrecoMedio(investimentos)
             document.querySelector('#qt').innerText = investimentos.length
-            console.log(investimentos[0])
             document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
             
             var table_body = table.querySelector('tbody')

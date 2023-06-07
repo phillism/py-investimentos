@@ -95,7 +95,6 @@ const ajustarPrecoMedioGeral = (investiments) => {
     investiments.reverse()
 
     return investiments.map((i) => {
-        console.log(i)
         i.valor_op = i.quantidade * i.valor_unit;
         i.imposto = i.valor_op * 0.0003;
         
@@ -118,7 +117,7 @@ const ajustarPrecoMedioGeral = (investiments) => {
         if (i.tipo == 'C') {
             i.valor_final = i.valor_op + i.imposto + i.taxa_corretagem;
 
-            soma_total += i.quantidade  
+            soma_total += i.quantidade
 
             i.preco_medio = (((soma_total - i.quantidade) * ultimo_pm) + i.valor_final) / soma_total
         } else {

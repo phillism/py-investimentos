@@ -5,10 +5,10 @@ async function carregarInvestimentos() {
     filtro = document.querySelector('#filter-ticker')
 
     try {
-        data = await obterInvestimentos()
+        data = ajustarPrecoMedioGeral(await obterInvestimentos())
         table_body.innerHTML = ``
 
-        data.reverse()
+        // data.reverse()
 
         data.forEach(d => {
             if (!d.id) {
@@ -35,9 +35,10 @@ async function carregarInvestimentos() {
             var celValorOp = linha.insertCell();
             var celImposto = linha.insertCell();
             var celValorFinal = linha.insertCell();
+            var celPM = linha.insertCell();
+            var celLP = linha.insertCell();
             var celAcao = linha.insertCell();
-
-            const { ticker, tipo, taxa_corretagem, quantidade, valor_unit, data } = d
+            const { ticker, tipo, taxa_corretagem, quantidade, valor_unit, data, lucro_prejuizo, preco_medio } = d
             const { logo_url, cod } = ticker
 
             celId.innerHTML = d.id;
@@ -66,6 +67,8 @@ async function carregarInvestimentos() {
 
             celValorOp.innerHTML = `${format(valor_op)}`
             celImposto.innerHTML = `${format(imposto)}`
+            celPM.innerHTML = `${format(preco_medio)}`
+            celLP.innerHTML = lucro_prejuizo ? `${format(lucro_prejuizo)}` : "-"
             celValorFinal.innerHTML = `${format(Number(valor_final))}`
             celAcao.innerHTML = `
             <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
