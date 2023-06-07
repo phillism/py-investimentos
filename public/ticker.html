@@ -86,8 +86,10 @@
                             <th>Taxa de corretagem</th>
                             <th>Valor operacional</th>
                             <th>Imposto</th>
+                            <th>Taxa B3</th>
                             <th>Valor Final</th>
                             <th>Preço médio</th>
+                            <th>L/P</th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -148,8 +150,10 @@
                 var celTaxa = linha.insertCell();
                 var celValorOp = linha.insertCell();
                 var celImposto = linha.insertCell();
+                var celTaxaB3 = linha.insertCell();
                 var celValorFinal = linha.insertCell();
                 var celPM = linha.insertCell();
+                var celLP = linha.insertCell();
                 var celAcao = linha.insertCell();
 
                 celData.innerHTML = format_data(i.data)
@@ -159,8 +163,10 @@
                 celTaxa.innerHTML = format(i.taxa_corretagem)
                 celValorOp.innerHTML = format(i.valor_op)
                 celImposto.innerHTML = format(i.imposto)
+                celTaxaB3.innerHTML = format(i.imposto)
                 celValorFinal.innerHTML = format(i.valor_final)
                 celPM.innerHTML = `${format(i.preco_medio)}`
+                celLP.innerHTML = `${format(i.lucro_prejuizo || "-")}`
                 celAcao.innerHTML = `
                     <button class="del-button" onclick="deleteInvestiment(${i.id})" cod="${i.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
                     <button class="edit-button" onclick="editInvestiment(${i.id}, true)" cod="${i.id}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
