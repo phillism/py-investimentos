@@ -130,7 +130,13 @@
             investimentos.reverse()
             
             investimentos_ajustados = ajustarPrecoMedio(investimentos)
+            console.log(investimentos_ajustados)
+            console.log(investimentos_ajustados)
+            console.log(investimentos_ajustados.lucro_prejuizo_total)
+            console.log(investimentos_ajustados.lucro_prejuizo_total)
+
             document.querySelector('#qt').innerText = investimentos.length
+            document.querySelector('#lc').innerText = format(investimentos_ajustados.lucro_prejuizo_total)
             document.querySelector('#ticker-img').setAttribute('src', investimentos[0].ticker.logo_url)
             
             var table_body = table.querySelector('tbody')

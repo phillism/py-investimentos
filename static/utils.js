@@ -65,8 +65,9 @@ function limparFormulario() {
 const ajustarPrecoMedio = (investiments) => {
     let soma_total = 0
     let ultimo_pm = 0
+    let lucro_prejuizo_total = 0
 
-    return investiments.map((i) => {
+    investiments = investiments.map((i) => {
         i.valor_op = i.quantidade * i.valor_unit;
         
         i.imposto = i.valor_op * 0.0003;
@@ -81,13 +82,19 @@ const ajustarPrecoMedio = (investiments) => {
 
             soma_total -= i.quantidade
             i.preco_medio = ultimo_pm
-            i.lucro_prejuizo = Math.round(i.valor_final - (i.preco_medio * i.quantidade), 2)
+            i.lucro_prejuizo = (i.valor_final - (i.preco_medio * i.quantidade))
+            lucro_prejuizo_total += i.lucro_prejuizo
         }
 
         ultimo_pm = i.preco_medio
 
         return i
     })
+
+    return {
+        lucro_prejuizo_total,
+        investiments
+    }
 }
 
 const ajustarPrecoMedioGeral = (investiments) => {
