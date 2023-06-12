@@ -77,7 +77,7 @@ async function carregarInvestimentos() {
 
             celValorFinal.innerHTML = `${format(Number(valor_final))}`
             celAcao.innerHTML = `
-            <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-trash-can"></i> Excluir</button>
+            <button class="del-button" onclick="deleteInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-trash-can"></i> Deletar</button>
             <button class="edit-button" onclick="editInvestiment(${d.id})" cod="${d.id}"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
             `
         }) 

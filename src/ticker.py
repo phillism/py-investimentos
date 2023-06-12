@@ -73,7 +73,7 @@ class Ticker:
 		result = content['results'][0]
 		self.valido = True
 		self.id = result['symbol']
-		self.enterprise = result['longName']
+		self.enterprise = result['longName'] if 'longName' in result else ''
 		self.moeda = result['currency']
 		self.imposto = -1
 		self.logo_url = result['logourl'] if 'logourl' in result else None

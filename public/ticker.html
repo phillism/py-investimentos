@@ -41,7 +41,10 @@
 
                     <div>
                         <label for="ticker">Ticker</label>
-                        <input type="text" id="ticker">
+                        <input autocomplete="off" list="tickers" onkeypress="keyPressEvent(event)" type="text" id="ticker">
+
+                        <datalist id="tickers">
+                        </datalist>
                     </div>
                     <div>
                         <label for="data">Data</label><br>
@@ -109,6 +112,7 @@
 	<script src="../static/database.js"></script>
 	<script src="../static/script.js"></script>
 	<script src="../static/investimento_utils.js"></script>
+    <script src="../static/events.js"></script>
 
     <script>
         async function carregarTickers() {
@@ -144,7 +148,7 @@
             var table_body = table.querySelector('tbody')
             table_body.innerHTML = `` 
 
-            ticker.innerHTML + `${investimentos[0].ticker.cod} (${investimentos[0].ticker.enterprise})`
+            ticker.innerHTML = `${investimentos[0].ticker.cod} (${investimentos[0].ticker.enterprise})`
 
             investimentos.forEach(i => {
                 var linha = table_body.insertRow();
